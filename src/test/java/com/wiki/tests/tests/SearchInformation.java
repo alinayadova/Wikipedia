@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class SearchInformation extends TestBase{
 
     @Test
-    public void SearchInformationTest(){
+    public void SearchInformationTest() throws InterruptedException {
         app.getSearchHelper().clickOnInputForm();
         app.getSearchHelper().fillInputForm("Appium");
         app.getSearchHelper().clickOnArticle();
@@ -15,17 +15,18 @@ public class SearchInformation extends TestBase{
     }
 
     @Test
-    public void SearchInformationAndAddingToListTest() {
+    public void SearchInformationAndAddingToListTest() throws InterruptedException {
         app.getSearchHelper().clickOnInputForm();
-        app.getSearchHelper().fillInputForm("Appium");
+        app.getSearchHelper().fillInputForm("Australia");
         app.getSearchHelper().clickOnArticle();
-        //app.getSearchHelper().addArticleToList();
+        app.getSearchHelper().addArticleToList();
+        app.getSearchHelper().returnToHomePageFromArticle();
 
-        Assert.assertTrue(app.getSearchHelper().isInputPresent());
+        Assert.assertFalse(app.getSearchHelper().isInputPresent());
     }
 
     @Test
-    public void SearchInformationAndDeletingArticleFromListTest() {
+    public void DeletArticleFromListTest() throws InterruptedException {
         app.getSearchHelper().clickOnInputForm();
         app.getSearchHelper().fillInputForm("Appium");
         app.getSearchHelper().clickOnArticle();
@@ -35,8 +36,7 @@ public class SearchInformation extends TestBase{
         app.getSearchHelper().deleteArticle();
 
 
-        Assert.assertTrue(app.getSearchHelper().isInputPresent());
-        Assert.assertTrue(app.getSearchHelper().isArticlePresent());
+        Assert.assertFalse(app.getSearchHelper().isInputPresent());
     }
 
 

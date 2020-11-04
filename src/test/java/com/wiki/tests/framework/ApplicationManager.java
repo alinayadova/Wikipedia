@@ -16,8 +16,8 @@ public class ApplicationManager {
     public void init() throws MalformedURLException {
         capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformName","Android" );
-        capabilities.setCapability("deviceName", "Samsung_Galaxy_S6");
-        capabilities.setCapability("platformVersion","5.0" );
+        capabilities.setCapability("deviceName", "Samsung_Galaxy_S6_1");
+        capabilities.setCapability("platformVersion","6.0" );
         capabilities.setCapability("appPackage", "org.wikipedia");
         capabilities.setCapability("appActivity", "main.MainActivity");
         capabilities.setCapability("automationName", "Appium");

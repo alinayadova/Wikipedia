@@ -18,47 +18,57 @@ public class SearchHelper extends HelperBase{
         waitForElementAndType(By.id("search_src_text"), 5, text);
     }
 
-    public void clickOnArticle() {
-
-       // waitForElementAndClick(By.id("fragment_feed_header"),5 );
+    public void clickOnArticle() throws InterruptedException {
         click(By.id("fragment_feed_header"));
+        Thread.sleep(10000);
     }
 
-
     public boolean isInputPresent() {
-        return isElementPresent(By.id("fragment_feed_header"));
+        return isElementPresent(By.id("search_toolbar"));
     }
 
     public void addArticleToList() {
-     //   driver.findElementByAccessibilityId("Add this article to a reading list").click();
-        waitForElementAndClick(By.id("page_actions_tab_layout"), 20);
-        if(! isArticlePresent()){
+        //click on add button
+        click(By.xpath("//*[@content-desc='Add this article to a reading list']"));
+        if (!isGotItButtonPresent()) {
+            //create new list
+            if (!isListExist()) {
+                click(By.id("create_button"));
+            }
+            //or add in exist list
+            else {
+                click(By.id("item_container"));
+            }
+        } else {
             click(By.id("onboarding_button"));
-            click(By.id("button1"));
-
+            waitForElementAndType(By.id("text_input"), 10, "My Articles");
+            click(By.xpath("//*[@resource-id='android:id/button1']"));
         }
-        click(By.id("item_container"));
 
+    }
+
+
+    public boolean isGotItButtonPresent(){
+        waitForElement(By.id("onboarding_button"), 20);
+        return isElementPresent(By.id("onboarding_button"));
+    }
+
+    public boolean isListExist(){
+        return isElementPresent(By.id("item_container"));
     }
 
     public void clickOnReadingListButton() {
-        click(By.id("icon"));
-        click(By.id("item_container"));
+        waitForElementAndClick(By.xpath("//*[@content-desc='My lists']"), 10);
+        click(By.xpath("//*[@resource-id='org.wikipedia:id/item_container']"));
     }
 
     public void deleteArticle() {
-        moveElementToLeft(By.id("page_list_item_container"));
+        moveElementToLeft(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']"));
     }
-
 
     public void returnToHomePageFromArticle() {
-        waitForElement(By.id("page_web_view"), 20);
-        click(By.id("page_toolbar"));
-    }
-
-    public boolean isArticlePresent(){
-        waitForElement(By.id("page_web_view"), 20);
-        return isElementPresent(By.id("page_web_view"));
+        waitForElement(By.xpath("//*[@content-desc='Navigate up']"), 10);
+        click(By.xpath("//*[@content-desc='Navigate up']"));
     }
 
 }
