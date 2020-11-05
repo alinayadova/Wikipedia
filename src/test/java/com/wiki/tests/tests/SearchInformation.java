@@ -15,7 +15,7 @@ public class SearchInformation extends TestBase{
     }
 
     @Test
-    public void SearchInformationAndAddingToListTest() throws InterruptedException {
+    public void SearchAndAddArticleToListTest() throws InterruptedException {
         app.getSearchHelper().clickOnInputForm();
         app.getSearchHelper().fillInputForm("Australia");
         app.getSearchHelper().clickOnArticle();
@@ -38,6 +38,7 @@ public class SearchInformation extends TestBase{
 
         Assert.assertFalse(app.getSearchHelper().isInputPresent());
     }
+
 
 
 

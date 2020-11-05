@@ -60,19 +60,19 @@ public class HelperBase {
         //get activity points
         Dimension size = driver.manage().window().getSize();
         int leftPoint = (int) (size.width* 0.1);
-        int rightPoint  = (int) (size.width* 0.6);
+        int rightPoint  = (int) (size.width* 0.8);
 
         //get element's point
         WebElement element = waitForElement(locator, 10);
 
         int leftX = (int) (element.getLocation().getX()* 0.1);
-        int rightX = (int) ((leftX + element.getSize().getWidth())* 0.6);
+        int rightX = (int) ((leftX + element.getSize().getWidth())* 0.8);
         int upperY = element.getLocation().getY();
         int lowerY = upperY + element.getSize().getHeight();
         int middleY = (upperY + lowerY) / 2;
 
-        action.longPress(PointOption.point(rightPoint, middleY))
-                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
+        action.press(PointOption.point(rightPoint, middleY))
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(8)))
                 .moveTo(PointOption.point(leftPoint, middleY))
                 .release().perform();
     }
